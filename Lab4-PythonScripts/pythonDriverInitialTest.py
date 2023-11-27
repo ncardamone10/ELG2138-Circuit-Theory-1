@@ -8,7 +8,7 @@ import pyvisa
 
 
 # Initialize the oscilloscope
-visa_address = 'USB0::2391::6041::MY55280378::INSTR'  # Replace with your actual address
+visa_address = 'USB0::2391::6039::MY56271217::INSTR'  # Replace with your actual address
 scope = Scope(visa_address)
 
 # Perform default setup
