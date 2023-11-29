@@ -4,7 +4,7 @@ import time
 from msox2000aSeriesScopeDriver import Scope
 
 # Initialize the oscilloscope
-visa_address = 'USB0::2391::6039::MY56271217::INSTR'
+visa_address = 'USB0::2391::6041::MY55280370::INSTR'
 scope = Scope(visa_address)
 
 # Bode plot parameters
@@ -12,7 +12,7 @@ start_freq = 0.1e3  # Start frequency: 1 kHz
 end_freq = 100e3   # End frequency: 10 kHz
 #step_freq = 0.1e3   # Frequency step: 1 kHz
 amplitude = 1     # Amplitude: 1 Vpp
-number_of_points = 1000
+number_of_points = 50
 
 # Frequency sweep
 #frequencies = np.arange(start_freq, end_freq + step_freq, step_freq)
@@ -37,8 +37,8 @@ for freq in frequencies:
     time.sleep(0.1)
 
     # Measure output peak-to-peak voltage on Channel 2
-    measured_vpp = scope.measure_vpp(2)
-    measured_vpp_input = scope.measure_vpp(1)
+    measured_vpp = scope.measure_vrms_display_ac(2)
+    measured_vpp_input = scope.measure_vrms_display_ac(1)
     output_vpp.append(measured_vpp)
     input_vpp_measured.append(measured_vpp_input)
 
