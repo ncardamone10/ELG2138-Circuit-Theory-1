@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{circuitikz}
+\usepackage{adjustbox}
+\pagestyle{empty}
+
+\begin{document}
+\begin{adjustbox}{trim=left 20} % Adjust the value as needed
+\begin{circuitikz} [american, scale=0.8]\draw
+% (0,0) to[battery] (0,4)
+%     to[ammeter] (4,4) -- (4,0)
+%     to[lamp] (0,0)
+% (0.5, 0) -- (0.5,-2)
+%     to[voltmeter] (3.5,-2) -- (3.5,0)
+
+% Main RF Signal Path
+(0,1) to[sinusoidal voltage source, l=\Large $v_s(t)$] (0,3)
+    to[european resistor=\Large ${50\, \Omega}$] (0,6) -- (2,6)
+    to[C=\Large ${1\, \mu F}$] (3,6) -- (5,6)
+    to[full diode, l=\Large $D_1$] (10,6) -- (12,6)
+    to[C=\Large ${1\, \mu F}$] (15,6) -- (16,6) -- (16,4)
+    to[european resistor=\Large $Z_{Load}$] (16,2) -- (16,1)
+;
+% Lower Bias Inductor/ Tee
+\draw(11,6) -- (11,5) to[cute choke=\Large ${100\, \mu H}$] (11,1);  
+
+% Create 5V Supply Rail
+\tikzset{srail/.style={rground,yscale=-1}}
+
+% High Bias Tee
+\draw(5,6) -- (5,7) to[cute choke=\Large ${100\, \mu H}$] (5,9) -- (5,10)
+    to[I,l=\Large ${1\, mA}$,invert] (5,12)
+    to (5,12) node[srail] {}
+    %node[above]{${5\, V\, 2}$}
+    node[label= {[xshift=0cm,yshift=1.5ex]above:\Large +5V}]{}
+;
+% Add in cap for bias tee
+\draw(5,9.5) -- (6,9.5) -- (6,8.5) to[C=\Large ${1\, \mu F}$] (6,7.5);
+
+% Label Output Voltage
+\draw(16,6) -- (16.5,6) to [short, -o] ++(1,0) node[above]{\Large $v_{out}(t)$};
+
+% Ground Nodes
+\draw(0,1) to (0,0.5) node[sground]{}; % Ground for source
+\draw(16,1) to (16,0.5) node[sground]{}; % Ground for load
+\draw(11,1) to (11,0.5) node[sground]{}; % Ground for lower bias tee inductor
+\draw(6,7.5) to (6,7.4) node[sground]{}; % Ground for upper bias tee cap
+
+
+
+\end{circuitikz}
+\end{adjustbox}
+\end{document}
+
+

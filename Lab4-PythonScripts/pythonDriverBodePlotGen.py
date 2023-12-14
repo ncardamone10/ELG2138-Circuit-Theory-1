@@ -4,12 +4,12 @@ import time
 from msox2000aSeriesScopeDriver import Scope
 
 # Initialize the oscilloscope
-visa_address = 'USB0::2391::6041::MY55280370::INSTR'
+visa_address = 'USB0::2391::6039::MY56271217::INSTR'
 scope = Scope(visa_address)
 
 # Bode plot parameters
 start_freq = 0.1e3  # Start frequency: 1 kHz
-end_freq = 100e3   # End frequency: 10 kHz
+end_freq = 10000e3   # End frequency: 10 kHz
 #step_freq = 0.1e3   # Frequency step: 1 kHz
 amplitude = 1     # Amplitude: 1 Vpp
 number_of_points = 50
